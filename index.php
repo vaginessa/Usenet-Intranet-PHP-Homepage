@@ -127,7 +127,8 @@
 
 					$sabStatusXML = $sabURL."/sabnzbd/api?mode=qstatus&output=xml&apikey=".$config['sabnzbdAPI'];
 					if($config['debug']){echo "SABnzbd Status URL: ".$sabStatusXML;}
-					$data = simplexml_load_file($sabStatusXML);
+					$temp = file_get_contents($sabStatusXML);
+					$data = simplexml_load_string($temp);
 					for($i = 0, $j = count($data->jobs[0]->job); $i < $j ; $i++) {
 					$filename = $data->jobs[0]->job[$i]->filename;
 					$mbFull = $data->jobs[0]->job[$i]->mb;
@@ -158,8 +159,8 @@
 				<h2>Recently Finished</h2>
 				<a href="#" class="go actionButton small">&lt;</a>
 				<?php
-
-					$data = simplexml_load_file($sabURL."/sabnzbd/api?mode=history&start=0&limit=5&output=xml&apikey=".$config['sabnzbdAPI']);
+					$temp = file_get_contents($sabURL."/sabnzbd/api?mode=history&start=0&limit=5&output=xml&apikey=".$config['sabnzbdAPI']);	
+					$data = simplexml_load_string($temp);
 					echo "<ul>";
 					foreach($data->slots[0] as $slot) {
 						echo "<li>".$slot->category." - ".$slot->nzb_name."</li>";
