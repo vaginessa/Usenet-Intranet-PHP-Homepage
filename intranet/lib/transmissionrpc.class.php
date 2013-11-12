@@ -186,7 +186,7 @@ class TransmissionRPC
   public function get ( $ids = array(), $fields = array() )
   {
     if ( !is_array( $ids ) ) $ids = array( $ids );	// Convert $ids to an array if only a single id was passed
-    if ( count( $fields ) == 0 ) $fields = array( "id", "name", "status", "doneDate", "haveValid", "totalSize" );	// Defaults
+    if ( count( $fields ) == 0 ) $fields = array( "id", "name", "status", "doneDate", "haveValid", "totalSize", "pieceSize", "isFinished","percentDone", "rateDownload" );	// Defaults
     $request = array(
       "fields" => $fields,
       "ids" => $ids

@@ -2,11 +2,12 @@
 
 // Include Settings
 include("serverconfig.php");
+include("lib/functions.php");
 
 // Edit Settings
 $username = $config['sickbeardUsername'];
 $password = $config['sickbeardPassword'];
-$ip = $config['sickbeardURL'].":".$config['sickbeardPort'];
+$ip = getURL($config['sickbeardURL'],$config['sickbeardPort']);
 $api = $config['sickbeardAPI'];
 // End Settings
 
@@ -31,15 +32,15 @@ $sbJSON = json_decode(file_get_contents($feed));
 			<?php
 			echo "<ul>";
 			// Run through each feed item
-			foreach($sbJSON->{data}->{later} as $show) {
+			foreach($sbJSON->{'data'}->{'later'} as $show) {
 				// Only grab shows of episode 1
-				if($show->{episode} == "1") {
+				if($show->{'episode'} == "1") {
 					// Reformat date
-					$newDate = date("l, j F Y", strtotime($show->{airdate}));
+					$newDate = date("l, j F Y", strtotime($show->{'airdate'}));
 					// Show Details
 					echo "<li>";
 					echo "<img src='http://".$ip."/showPoster/?show=".$show->{'tvdbid'}."&which=banner' class='showbanner' />";
-					echo "<strong>".$show->{show_name} . "</strong><br />Season " . $show->{season} . "<br /><br />Starts " .$newDate;
+					echo "<strong>".$show->{'show_name'} . "</strong><br />Season " . $show->{'season'} . "<br /><br />Starts " .$newDate;
 					echo "</li>";
 				}
 			}

@@ -7,36 +7,48 @@
 
 ================================================================== */
 
+function getURL ($url,$port) {
+    $host = explode('/',$url,2)[0];
+    $weburl = $host.":".$port;
+    if ($host <> $url) {
+    	$root = explode('/',$url,2)[1];
+	$weburl = $weburl."/".$root;
+    }
+    return $weburl;
+}
     # Sickbeard URL Joining
     if($config['sickbeardHTTPS']) {$sickbeardProtocol = "https";} else {$sickbeardProtocol = "http";}
     if($config['sickbeardUsername']) {
-        $sickbeardURL = $sickbeardProtocol."://".$config['sickbeardUsername'].":".$config['sickbeardPassword']."@".$config['sickbeardURL'].":".$config['sickbeardPort'];
+        $sickbeardURL = $sickbeardProtocol."://".$config['sickbeardUsername'].":".$config['sickbeardPassword']."@";
     } else {
-        $sickbeardURL = $sickbeardProtocol."://".$config['sickbeardURL'].":".$config['sickbeardPort'];
+        $sickbeardURL = $sickbeardProtocol."://";
     }
+    $sickbeardURL = $sickbeardURL.getURL($config['sickbeardURL'],$config['sickbeardPort']);
 
     # Sabnzbd URL Joining
     if($config['sabnzbdHTTPS']) {$sabProtocol = "https";} else {$sabProtocol = "http";}
     if($config['sabnzbdUsername']) {
-        $sabURL = $sabProtocol."://".$config['sabnzbdUsername'].":".$config['sabnzbdPassword']."@".$config['sabnzbdURL'].":".$config['sabnzbdPort'];
+        $sabURL = $sabProtocol."://".$config['sabnzbdUsername'].":".$config['sabnzbdPassword']."@";
     } else {
-        $sabURL = $sabProtocol."://".$config['sabnzbdURL'].":".$config['sabnzbdPort'];
+        $sabURL = $sabProtocol."://";
     }
+    $sabURL = $sabURL.getURL($config['sabnzbdURL'],$config['sabnzbdPort']);
 
     # Transmission Joining
     if($config['transmissionUsername']) {
-        $transmissionURL = "http://".$config['transmissionURL'].":".$config['transmissionPort']."@".$config['transmissionUsername'].":".$config['transmissionPassword'];
+        $transmissionURL = "http://".$config['transmissionUsername'].":".$config['transmissionPassword']."@";
     } else {
-        $transmissionURL = "http://".$config['transmissionURL'].":".$config['transmissionPort'];
+        $transmissionURL = "http://";
     }
+    $transmissionURL = $transmissionURL.getURL($config['transmissionURL'],$config['transmissionPort']);
 
     # Headphones Joining
     if($config['headphonesHTTPS']) {$headphonesProtocol = "https";} else {$headphonesProtocol = "http";}
-    $headphonesURL = $headphonesProtocol."://".$config['headphonesURL'].":".$config['headphonesPort'];
+    $headphonesURL = $headphonesProtocol."://".getURL($config['headphonesURL'],$config['headphonesPort']);
 
     # Couchpotato Joining
     if($config['couchpotatoHTTPS']) {$couchpotatoProtocol = "https";} else {$couchpotatoProtocol = "http";}
-    $couchpotatoURL = $couchpotatoProtocol."://".$config['couchpotatoURL'].":".$config['couchpotatoPort'];
+    $couchpotatoURL = $couchpotatoProtocol."://".getURL($config['couchpotatoURL'],$config['couchpotatoPort']);
 
 /* ==================================================================
 

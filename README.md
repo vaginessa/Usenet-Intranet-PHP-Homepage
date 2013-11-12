@@ -9,9 +9,11 @@ A simple little one-page Intranet homepage I created for my home server with the
 	* Headphones
 	* SABnzbd
 	* uTorrent WebUI
+	* TransmissionBT WebUI
 	* Movie Trailers
 * Currently downloading on SABnzbd
 * Currently downloading on uTorrent (requires web ui to be enabled)
+* Currently downloading on Transmission (requires rpc to be enabled)
 * List of TV Shows that come out today from Sickbeard
 * Show Wifi Password
 * Completely customisable to show or hide only the features you want
