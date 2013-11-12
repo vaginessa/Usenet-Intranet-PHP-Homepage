@@ -128,11 +128,12 @@
 					$sabStatusXML = $sabURL."/sabnzbd/api?mode=qstatus&output=xml&apikey=".$config['sabnzbdAPI'];
 					if($config['debug']){echo "SABnzbd Status URL: ".$sabStatusXML;}
 					$data = simplexml_load_file($sabStatusXML);
-					$filename = $data->jobs[0]->job->filename;
-					$mbFull = $data->jobs[0]->job->mb;
-					$mbLeft = $data->jobs[0]->job->mbleft;
+					for($i = 0, $j = count($data->jobs[0]->job); $i < $j ; $i++) {
+					$filename = $data->jobs[0]->job[$i]->filename;
+					$mbFull = $data->jobs[0]->job[$i]->mb;
+					$mbLeft = $data->jobs[0]->job[$i]->mbleft;
 					$mbDone = $mbFull - $mbLeft;
-
+					}
 					if($filename) {
 
 						$mbFullNoRound = explode(".",$mbFull);
@@ -244,6 +245,60 @@
 
 $rpc = new TransmissionRPC();
 $rpc->url = $transmissionURL."/transmission/rpc";
+try
+{
+  $rpc->return_as_array = true;
+  $result = $rpc->get();
+                                        $torrentsComplete = array();
+                                        $torrentsDownloading = array();
+
+                                        // Check if any results are returned
+                                        if(sizeof($result['arguments']['torrents'])==0) {
+
+                                                echo "<em>No current downloads</em>";
+
+                                        } else {
+
+                                                // Run through each torrent and insert in to appropriate variables
+                                                foreach($result['arguments']['torrents']  as $torrent) {
+                                                    if($torrent['status'] == "1") {
+                                                       array_push($torrentsComplete, $torrent);
+                                                    } else {
+                                                        array_push($torrentsDownloading, $torrent);
+                                                    }
+                                                }
+
+                                                // Cut off array at 5 each
+                                                $torrentsDownloading = array_slice($torrentsDownloading,0,5);
+
+                                              // List all pending downloads
+                                                foreach($torrentsDownloading as $torrentDone) {
+                                                    $name = $torrentDone['name'];
+                                                    $sizeFull = $torrentDone['totalSize'];
+                                                    $sizeDone = $torrentDone['pieceSize']*100;
+                                                    $percentage = $torrentDone['percentDone']*100;
+
+                                                    $speed = $torrentDone['rateDownload'];
+
+                                                    echo "<div class='torrent'>";
+                                                    echo $name;
+                                                    echo "<progress value='".$sizeDone."' max='".$sizeFull."'></progress>";
+                                                    echo "<span class='stats'>";
+                                                    echo ByteSize($sizeDone)." / ".ByteSize($sizeFull)." (".$percentage."%)";
+
+                                                    echo " @ " .ByteSize($speed);
+                                                    echo "</span>";
+                                                    echo "</div>";
+                                                }
+                                        }
+
+
+
+  $rpc->return_as_array = false;
+} catch (Exception $e) {
+print "<pre>".$e->getMessage()."</pre>";
+  die('[ERROR] ' . $e->getMessage() . PHP_EOL);
+}
 
 					?>
 				</div>
