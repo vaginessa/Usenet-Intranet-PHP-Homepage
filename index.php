@@ -3,8 +3,9 @@
 <?php if($config['uTorrent']) {include('intranet/lib/utorrent_php_api.php');} ?>
 <?php if($config['transmission']) {include('intranet/lib/transmissionrpc.class.php');} ?>
 <!doctype html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
+		<meta charset="UTF-8">
 		<title><?= $config['wifiName']; ?> Intranet</title>
 		<link rel="stylesheet" href="intranet/style.css" />
 		<link rel="shortcut icon" href="favicon.ico" />
@@ -15,7 +16,7 @@
 		<?php ## Check if everything is disabled
 			if (!$config['sickbeard'] && !$config['couchpotato'] && !$config['headphones'] && !$config['sabnzbd'] && !$config['showWifi'] && !$config['showTrailers']) :
 
-				echo "<img src='intranet/images/mymanjackie.png' />";
+				echo "<img src='intranet/images/mymanjackie.png' alt='error' />";
 
 			else :
 		?>
@@ -48,13 +49,13 @@
 						# Sickbeard Popups
 						if($config ['sickPopups']) :
 						echo "<span class='showPopup'>";
-						echo "<img src='".$sickbeardURL."/showPoster/?show=".$episode->{'tvdbid'}."&which=poster' class='showposter' />";
+						echo "<img src='".$sickbeardURL."/showPoster/?show=".$episode->{'tvdbid'}."&amp;which=poster' class='showposter' alt='".$episode->{'tvdbid'}."'/>";
 						echo "</span>";
 						endif;
 
 						# Show name and number
 						echo "<strong class='showname'>".$episode->{'show_name'}."</strong><br />";
-						echo "<span class='showep'>".$episode->{'season'}."x".$episode->{'episode'}." - ". $episode->{'ep_name'};
+						echo "<span class='showep'>".$episode->{'season'}."x".$episode->{'episode'}." - ". $episode->{'ep_name'}."</span>";
 						echo "</li>";
 					} 
 				}
@@ -87,7 +88,7 @@
 						# Sickbeard Popups
 						if($config ['sickPopups']) :
 						echo "<span class='showPopup'>";
-						echo "<img src='".$sickbeardURL."/showPoster/?show=".$episode->{'tvdbid'}."&which=poster' class='showposter' />";
+						echo "<img src='".$sickbeardURL."/showPoster/?show=".$episode->{'tvdbid'}."&amp;which=poster' class='showposter' alt='".$episode->{'tvdbid'}."' />";
 						echo "</span>";
 						endif;
 
@@ -280,6 +281,9 @@ try
                                                 foreach($torrentsDownloading as $torrentDone) {
                                                     $name = $torrentDone['name'];
                                                     $sizeFull = $torrentDone['totalSize'];
+						    if ($sizeFull==0) {
+						    	$sizeFull = 1;
+						    }
                                                     $sizeDone = $torrentDone['pieceSize']*100;
                                                     $percentage = $torrentDone['percentDone']*100;
 
@@ -329,7 +333,7 @@ print "<pre>".$e->getMessage()."</pre>";
 		<?php if( $config['showWifi'] ) : ?>
 			<div class="wifi">
 				<h2>Wifi Password for <?= $config['wifiName'] ?></h2>
-				<big><?= $config['wifiPassword']; ?></big>
+				<h3><?= $config['wifiPassword']; ?></h3>
 			</div>
 		<?php endif; ?>
 

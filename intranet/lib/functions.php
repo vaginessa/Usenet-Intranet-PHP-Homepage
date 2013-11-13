@@ -9,7 +9,11 @@
 
 function getURL ($url,$port) {
     $host = explode('/',$url,2)[0];
-    $weburl = $host.":".$port;
+    if ($port='80') {
+    	$weburl = $host;
+    } else {
+        $weburl = $host.":".$port;
+    }
     if ($host <> $url) {
     	$root = explode('/',$url,2)[1];
 	$weburl = $weburl."/".$root;
