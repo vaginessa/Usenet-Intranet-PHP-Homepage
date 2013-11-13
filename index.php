@@ -125,7 +125,7 @@
 				<a href="#" class="go actionButton small">&gt;</a>
 				<?php
 
-					$sabStatusXML = $sabURL."/sabnzbd/api?mode=qstatus&output=xml&apikey=".$config['sabnzbdAPI'];
+					$sabStatusXML = $sabURL."/api?mode=qstatus&output=xml&apikey=".$config['sabnzbdAPI'];
 					if($config['debug']){echo "SABnzbd Status URL: ".$sabStatusXML;}
 					$temp = file_get_contents($sabStatusXML);
 					$data = simplexml_load_string($temp);
@@ -135,7 +135,7 @@
 					$mbLeft = $data->jobs[0]->job[$i]->mbleft;
 					$mbDone = $mbFull - $mbLeft;
 					}
-					if($filename) {
+					if(isset($filename)) {
 
 						$mbFullNoRound = explode(".",$mbFull);
 						$mbPercent = $mbDone / $mbFullNoRound[0] * 100;
@@ -159,13 +159,15 @@
 				<h2>Recently Finished</h2>
 				<a href="#" class="go actionButton small">&lt;</a>
 				<?php
-					$temp = file_get_contents($sabURL."/sabnzbd/api?mode=history&start=0&limit=5&output=xml&apikey=".$config['sabnzbdAPI']);	
+					$temp = file_get_contents($sabURL."/api?mode=history&start=0&limit=5&output=xml&apikey=".$config['sabnzbdAPI']);	
 					$data = simplexml_load_string($temp);
+					if (isset($data)) {
 					echo "<ul>";
 					foreach($data->slots[0] as $slot) {
 						echo "<li>".$slot->category." - ".$slot->nzb_name."</li>";
 					}
 					echo "</ul>";
+					}
 				?>
 			</div>
 			<?php endif; ?>
@@ -245,7 +247,7 @@
 						//$transmissionAPI = new TransmissionRPC($transmissionURL."/transmission/rpc", null, null, true);
 
 $rpc = new TransmissionRPC();
-$rpc->url = $transmissionURL."/transmission/rpc";
+$rpc->url = $transmissionURL."/rpc";
 try
 {
   $rpc->return_as_array = true;
