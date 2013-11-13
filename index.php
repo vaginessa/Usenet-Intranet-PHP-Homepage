@@ -240,8 +240,10 @@
 		<section class="clearfix">
 			<a href="<?= $transmissionURL; ?>" title="Transmission" class="actionButton big transmission"><span>Transmission</span></a>
 
-			<div class="downloadFrame">
+			<div class="downloadFrame clearfix">
+			<div class="downloadFrameSlide clearfix">
 				<div class="downloadPage downloadPageCurrent">
+				<a href="#" class="go actionButton small">&gt;</a>
 					<h2>Currently Downloading</h2>
 					<?php
 						//$transmissionAPI = new TransmissionRPC($transmissionURL."/transmission/rpc", null, null, true);
@@ -293,6 +295,19 @@ try
                                                     echo "</span>";
                                                     echo "</div>";
                                                 }
+						echo <<< END
+						                        </div>
+								                        <div class="downloadPage downloadPageHistory">
+						                                <h2>Recently Finished</h2>
+				<a href="#" class="go actionButton small">&lt;</a>
+END;
+                                        echo "<ul>";
+					foreach($torrentsComplete as $slot) {
+		                           echo "<li>".$slot['name']."</li>";
+                                        }	
+					echo "</ul>";
+
+
                                         }
 
 
@@ -305,6 +320,7 @@ print "<pre>".$e->getMessage()."</pre>";
 
 					?>
 				</div>
+			</div>
 			</div>
 		</section>
 		<?php endif; ?>
