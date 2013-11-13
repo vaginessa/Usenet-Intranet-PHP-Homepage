@@ -106,6 +106,12 @@
                                 "url" => "/ampache/",
                                 "icon" => "",
                         ),
+			8 => array(
+				"label" => "Trakt.TV",
+				"url" => "http://trakt.tv",
+				"icon" => "",
+			),
+
 		),
 
 	);
