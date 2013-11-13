@@ -7,27 +7,27 @@
 		"couchpotato" => true,
 		"headphones" => true,
 		"sabnzbd" => true,
-		"uTorrent" => true,
-		"transmission" => false,
+		"uTorrent" => false,
+		"transmission" => true,
 
 		# URLs and Ports
-		"sickbeardURL" => "192.168.1.1",
+		"sickbeardURL" => "$_SERVER[HTTP_HOST]",
 		"sickbeardPort" => "8081",
 		"sickbeardAPI" => "",
 		"sickbeardHTTPS" => false,
-		"sabnzbdURL" => "192.168.1.1",
+		"sabnzbdURL" => "$_SERVER[HTTP_HOST]",
 		"sabnzbdPort" => "8080",
 		"sabnzbdAPI" => "",
 		"sabnzbdHTTPS" => false,
-		"couchpotatoURL" => "192.168.1.1",
+		"couchpotatoURL" => "$_SERVER[HTTP_HOST]",
 		"couchpotatoPort" => "5000",
 		"couchpotatoHTTPS" => false,
-		"headphonesURL" => "192.168.1.1",
+		"headphonesURL" => "$_SERVER[HTTP_HOST]",
 		"headphonesPort" => "8181",
 		"headphonesHTTPS" => false,
-		"uTorrentURL" => "192.168.1.1",
+		"uTorrentURL" => "$_SERVER[HTTP_HOST]",
 		"uTorrentPort" => "8089",
-		"transmissionURL" => "192.168.1.1",
+		"transmissionURL" => "$_SERVER[HTTP_HOST]",
 		"transmissionPort" => "9091",
 
 		# Usernames and Passwords
@@ -67,14 +67,45 @@
 		# Bookmarks
 		"bookmarks" => array(
 			0 => array(
-				"label" => "NZBMatrix",
-				"url" => "http://www.nzbmatrix.com",
-			),
-			1 => array(
 				"label" => "Season Start Dates",
 				"url" => "intranet/comingseasons.php",
 				"icon" => "intranet/images/tv.png",
 			),
+                        1 => array(
+                                "label" => "NZB.su",
+                                "url" => "https://nzb.su/login",
+                                "icon" => "intranet/images/nzb_su.png",
+                        ),
+                        2 => array(
+                                "label" => "Monit",
+                                "url" => "/monit/",
+                                "icon" => "",
+                        ),
+                        3 => array(
+                                "label" => "Owncloud",
+                                "url" => "/owncloud",
+                                "icon" => "intranet/images/owncloud.png",
+                        ),
+                        4 => array(
+                                "label" => "SpotWeb",
+                                "url" => "/spotweb/",
+                                "icon" => "",
+                        ),
+                        5 => array(
+                                "label" => "Lazy Librarian",
+                                "url" => "/lazylibrarian/",
+                                "icon" => "",
+                        ),
+                        6 => array(
+                                "label" => "Mylar",
+                                "url" => "/mylar/",
+                                "icon" => "",
+                        ),
+                        7 => array(
+                                "label" => "Ampache",
+                                "url" => "/ampache/",
+                                "icon" => "",
+                        ),
 		),
 
 	);
