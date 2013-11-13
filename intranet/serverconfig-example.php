@@ -9,6 +9,7 @@
 		"sabnzbd" => true,
 		"uTorrent" => false,
 		"transmission" => true,
+		"bfgminer" => false,
 
 		# URLs and Ports
 		"sickbeardURL" => "$_SERVER[HTTP_HOST]",
@@ -29,6 +30,9 @@
 		"uTorrentPort" => "8089",
 		"transmissionURL" => "$_SERVER[HTTP_HOST]",
 		"transmissionPort" => "9091",
+                "bfgminerURL" => "$_SERVER[HTTP_HOST]",
+		"bfgminerPort" => "4028",
+
 
 		# Usernames and Passwords
 		# If not using usernames or passwords, leave these to false.

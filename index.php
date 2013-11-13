@@ -75,7 +75,6 @@
 				foreach($sbShowsdone->{'data'} as $episode) {
 
 					if (substr($episode->date,0,10) == $todaysDate && $episode->status == "Snatched") :
-
 						// Check Quality Snatched
 						if ($episode->{'quality'} == "SD TV") :
 							$quality = "sd";
@@ -100,7 +99,19 @@
 
 				} 
 				echo "</ul>";
-
+				
+				if($config['bfgminer']) {
+				include('intranet/lib/bfgminer.php');
+				$rpc = new bfgminer($config['bfgminerURL'], $config['bfgminerPort']);
+				$rpc->url = $config['bfgminerURL'];
+				$rpc->port = $config['bfgminerPort'];
+				  $rpc->return_as_array = true;
+				    $result = $rpc->get();
+				    print "<br /><h3>BFG Miner</h3>";
+				    echo "<ul class='comingShows'>";
+				    print $result;
+				    echo "</ul>";
+				}
 			?>
 		</div>
 		<?php endif; ?>
