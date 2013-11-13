@@ -262,7 +262,7 @@ try
 
                                                 // Run through each torrent and insert in to appropriate variables
                                                 foreach($result['arguments']['torrents']  as $torrent) {
-                                                    if($torrent['status'] == "1") {
+                                                    if($torrent['isFinished']) {
                                                        array_push($torrentsComplete, $torrent);
                                                     } else {
                                                         array_push($torrentsDownloading, $torrent);
