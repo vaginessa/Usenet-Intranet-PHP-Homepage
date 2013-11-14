@@ -141,12 +141,12 @@
 					if($config['debug']){echo "SABnzbd Status URL: ".$sabStatusXML;}
 					$temp = file_get_contents($sabStatusXML);
 					$data = simplexml_load_string($temp);
-					for($i = 0, $j = count($data->jobs[0]->job); $i < $j ; $i++) {
-					$filename = $data->jobs[0]->job[$i]->filename;
-					$mbFull = $data->jobs[0]->job[$i]->mb;
-					$mbLeft = $data->jobs[0]->job[$i]->mbleft;
+					foreach($data->jobs[0] as $job) {
+					$filename = $job->filename;
+					$mbFull = $job->mb;
+					$mbLeft = $job->mbleft;
 					$mbDone = $mbFull - $mbLeft;
-					}
+					
 					if(isset($filename)) {
 
 						$mbFullNoRound = explode(".",$mbFull);
@@ -163,6 +163,7 @@
 						
 						echo "<em class='currentdl'>No current downloads</em>";
 
+					}
 					}
 				?>
 
