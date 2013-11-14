@@ -123,7 +123,7 @@ function get() {
 #else
  $r = $this->request('summary');
 #
-$values = array("MHS av", "MHS 5s", "Found Blocks", "Stale");
+$values = array("MHS av", "Accepted","Rejected","Hardware Errors","Utility");
 $string = "";
 foreach ($values as $val)
 {

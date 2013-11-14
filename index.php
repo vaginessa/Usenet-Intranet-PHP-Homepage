@@ -262,6 +262,12 @@
 
 $rpc = new TransmissionRPC();
 $rpc->url = $transmissionURL."/rpc";
+if ($config['transmissionUsername']) {
+$rpc->username = $config['transmissionUsername'];
+}
+if ($config['transmissionPassword']) {
+$rpc->password = $config['transmissionPassword'];
+}
 try
 {
   $rpc->return_as_array = true;
