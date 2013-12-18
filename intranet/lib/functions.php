@@ -46,6 +46,14 @@ function getURL ($url,$port) {
     }
     $transmissionURL = $transmissionURL.getURL($config['transmissionURL'],$config['transmissionPort']);
 
+    # deluge Joining
+    if($config['delugeUser']) {
+        $delugeURL = "http://".$config['delugeUser'].":".$config['delugePass']."@";
+    } else {
+        $delugeURL = "http://";
+    }
+    $delugeURL = $delugeURL.getURL($config['delugeURL'],$config['delugePort']);
+
     # Headphones Joining
     if($config['headphonesHTTPS']) {$headphonesProtocol = "https";} else {$headphonesProtocol = "http";}
     $headphonesURL = $headphonesProtocol."://".getURL($config['headphonesURL'],$config['headphonesPort']);

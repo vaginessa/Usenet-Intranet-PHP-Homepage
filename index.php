@@ -248,7 +248,88 @@
 			</div>
 		</section>
 		<?php endif; ?>
+<?php
+if($config['deluge']) { 
+echo '<section class="clearfix">';
+echo "<a href='".$delugeURL."' title='Deluge' class='actionButton big deluge'><span>Deluge</span></a>";
+echo <<< END
 
+                        <div class="downloadFrame clearfix">
+                        <div class="downloadFrameSlide clearfix">
+                                <div class="downloadPage downloadPageCurrent">
+                                <a href="#" class="go actionButton small">&gt;</a>
+<h2>Currently Downloading</h2>
+END;
+include ('intranet/lib/delugerpc.class.php');
+$rpc = new DelugeRPC();
+$rpc->url = $config['delugeURL'];
+if ($config['delugePort']) {
+$rpc->port = $config['delugePort'];
+}
+if ($config['delugeUser']) {
+$rpc->username = $config['delugeUser'];
+}
+if ($config['delugePass']) {
+$rpc->password = $config['delugePass'];
+}
+try {
+$result = $rpc->get();
+        $torrentsComplete = array();
+	$torrentsDownloading = array();
+	if(sizeof($result)==0) {
+	        echo "<em>No current downloads</em>";
+	} else {
+	foreach ($result as $torrent) {
+	  if ($torrent['progress'] == 100) {
+	    array_push($torrentsComplete, $torrent);
+	  } else {
+	    array_push($torrentsDownloading,$torrent);
+	  }
+	}
+	}
+
+        // Cut off array at 5 each
+        $torrentsDownloading = array_slice($torrentsDownloading,0,5);
+
+        // List all pending downloads
+        foreach($torrentsDownloading as $torrentDone) {
+            $name = $torrentDone['name'];
+            $sizeFull = $torrentDone['total_size'];
+            if ($sizeFull==0) {
+                $sizeFull = 1;
+            }
+            $sizeDone = $torrentDone['total_done'];
+            $percentage = $torrentDone['progress'];
+           $speed = $torrentDone['download_payload_rate'];
+
+            echo "<div class='torrent'>";
+            echo $name;
+            echo "<progress value='".$sizeDone."' max='".$sizeFull."'></progress>";
+            echo "<span class='stats'>";
+            echo ByteSize($sizeDone)." / ".ByteSize($sizeFull)." (".$percentage."%)";
+
+            echo " @ " .ByteSize($speed);
+            echo "</span>";
+            echo "</div>";
+        }
+        echo <<< END
+                                </div>
+        <div class="downloadPage downloadPageHistory">
+<h2>Recently Finished</h2>
+                                <a href="#" class="go actionButton small">&lt;</a>
+END;
+echo "<ul>";
+foreach($torrentsComplete as $slot) {
+   echo "<li>".$slot['name']."</li>";
+}
+echo "</ul>";
+} catch (Exception $e) {
+print "<pre>".$e->getMessage()."</pre>";
+  die('[ERROR] ' . $e->getMessage() . PHP_EOL);
+}
+print "</div></div></div></section>";
+}
+?>
 		<?php if($config['transmission']) : ?>	
 		<section class="clearfix">
 			<a href="<?= $transmissionURL; ?>" title="Transmission" class="actionButton big transmission"><span>Transmission</span></a>

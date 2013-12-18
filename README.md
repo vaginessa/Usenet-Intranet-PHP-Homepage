@@ -10,6 +10,7 @@ A simple little one-page Intranet homepage I created for my home server with the
 	* SABnzbd
 	* uTorrent WebUI
 	* TransmissionBT WebUI
+	* Deluge WebUI
 	* Movie Trailers
 * Currently downloading on SABnzbd
 * Currently downloading on uTorrent (requires web ui to be enabled)
