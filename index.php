@@ -150,7 +150,11 @@
 					if(isset($filename)) {
 
 						$mbFullNoRound = explode(".",$mbFull);
-						$mbPercent = $mbDone / $mbFullNoRound[0] * 100;
+                                                if ($mbFullNoRound[0] > 0) {
+                                                  $mbPercent = $mbDone / $mbFullNoRound[0] * 100;
+                                                } else {
+                                                  $mbPercent = 0;
+                                                }
 						$mbPercentPretty = explode(".",$mbPercent);
 
 						echo "<span class='currentdl'>";
