@@ -10,6 +10,7 @@
 		"uTorrent" => false,
 		"transmission" => true,
 		"bfgminer" => false,
+		"deluge" => false,
 
 		# URLs and Ports
 		"sickbeardURL" => "$_SERVER[HTTP_HOST]",
@@ -32,6 +33,8 @@
 		"transmissionPort" => "9091",
                 "bfgminerURL" => "$_SERVER[HTTP_HOST]",
 		"bfgminerPort" => "4028",
+		"delugeURL" => "$_SERVER[HTTP_HOST]",
+		"delugePort" => "8112",
 
 
 		# Usernames and Passwords
@@ -45,6 +48,8 @@
 		"uTorrentPassword" => "admin",
 		"transmissionUsername" => false,
 		"transmissionPassword" => false,
+		"delugeUser" => "admin",
+		"delugePass" => "deluge",
 
 		# Sickbeard - Missed or Coming?
 		# Australia, for example, is almost an entire day ahead of America so American TV shows 

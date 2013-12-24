@@ -47,6 +47,7 @@ h2 {padding-bottom: 10px;}
 	.actionButton.sabnzb span {background-image: url("images/sab.png");}
 	.actionButton.utorrent span {background-image: url("images/utorrent.png");}
 	.actionButton.transmission span {background-image: url("images/transmission.png");}
+	.actionButton.deluge span {background-image: url("images/deluge.png");}
 
 	.secondaryButtons {padding-top: 30px; width: 696px;}
 	.actionButton.icon span {background-position: 0 50%; background-repeat: no-repeat; padding-left: 25px;}
@@ -54,6 +55,7 @@ h2 {padding-bottom: 10px;}
 
 	.actionButton.sabnzb,
 	.actionButton.transmission,
+	.actionButton.deluge,
 	.actionButton.utorrent {clear: left; margin-top: 30px;}
 
 /* =========================================================
