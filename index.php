@@ -383,7 +383,7 @@ try
 						    if ($sizeFull==0) {
 						    	$sizeFull = 1;
 						    }
-                                                    $sizeDone = $torrentDone['pieceSize']*100;
+                                                    $sizeDone = $torrentDone['downloadedEver'];
                                                     $percentage = $torrentDone['percentDone']*100;
 
                                                     $speed = $torrentDone['rateDownload'];
