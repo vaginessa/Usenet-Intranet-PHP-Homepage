@@ -11,6 +11,12 @@
 		<link rel="shortcut icon" href="favicon.ico" />
 	</head>
 	<body>
+        	<?php 
+	        if ( $config['yacy'] ) :
+	                include('intranet/lib/yacy.php');
+		endif;
+		?>
+
 		<h1><?= $config['wifiName']; ?> Server</h1>
 
 		<?php ## Check if everything is disabled

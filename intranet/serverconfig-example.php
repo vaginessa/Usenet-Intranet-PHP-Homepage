@@ -11,8 +11,10 @@
 		"transmission" => true,
 		"bfgminer" => false,
 		"deluge" => false,
-
+		"yacy" => false,
+		
 		# URLs and Ports
+		"yacyUrl" => "http://$_SERVER[HTTP_HOST]:8090",
 		"sickbeardURL" => "$_SERVER[HTTP_HOST]",
 		"sickbeardPort" => "8081",
 		"sickbeardAPI" => "",
