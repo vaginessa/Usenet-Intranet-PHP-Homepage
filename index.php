@@ -82,6 +82,7 @@
 
 					if (substr($episode->date,0,10) == $todaysDate && $episode->status == "Snatched") :
 						// Check Quality Snatched
+						$quality = "";
 						if ($episode->{'quality'} == "SD TV") :
 							$quality = "sd";
 						elseif ($episode->{'quality'} == "HD TV") :
